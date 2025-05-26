@@ -18,5 +18,5 @@ It is prepared to extract graphics from a mat file in Matlab in a modular way. Y
    
 | Single Plot | Spesific Plot | Multi Plot|
 |--------------------------|--------------------------| --------------------|
-| !Single Plot](figures/SinglePlot.PNG) | ![Spesific Plot](figures/SpesificPlot.PNG) | !Multi Plot(figures/MultiPlot.PNG) |
+| ![Single Plot](figures/SinglePlot.png) | ![Spesific Plot](figures/SpesificPlot.png) | ![Multi Plot](figures/MultiPlot.png) |
 
