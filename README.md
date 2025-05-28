@@ -1,4 +1,4 @@
-# ModularPlotMatlab
+# CustomPlot
 
 It is prepared to extract graphics from a mat file in Matlab in a modular way. You can specify the indices, labels and legends of the data you want to extract and get a graph quickly.
 

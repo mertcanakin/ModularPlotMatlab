@@ -1,4 +1,4 @@
-function plot_main(t, actual_data, varargin)
+function plot_settings(t, actual_data, varargin)
 
     % Parameters:
     %   t              - Time vector
@@ -60,4 +60,77 @@ function plot_main(t, actual_data, varargin)
         plot_single(t, actual_data, indices, labels, p.Results);
     end
 
+end
+
+function plot_subplots(t, actual, desired, indices, labels, params, has_desired)
+    figure;
+    num_plots = length(indices);
+    
+    for i = 1:num_plots
+        subplot(num_plots, 1, i);
+        
+        % Plot actual
+        plot(t, actual(indices(i), :), params.line_styles{1}, ...
+             'Color', params.colors{1}, 'LineWidth', 1.5);
+        hold on;
+        
+        % Plot desired if available
+        if has_desired
+            plot(t, desired(indices(i), :), params.line_styles{2}, ...
+                 'Color', params.colors{2}, 'LineWidth', 1.5);
+        end
+        
+        % Labels and formatting
+        xlabel('Time [s]');
+        ylabel_str = labels{i};
+        if ~isempty(params.units)
+            ylabel_str = sprintf('%s [%s]', ylabel_str, params.units);
+        end
+        ylabel(ylabel_str);
+        
+        % Only show legend if we have desired data
+        if has_desired
+            legend(params.legend_labels);
+        end
+        grid on;
+        
+        % Make it look nice
+        set(gca, 'FontSize', 10);
+    end
+    
+    % Overall title
+    set(findobj(gcf,'type','axes'),'FontName', 'Arial', 'FontSize', 12);
+
+end
+
+function plot_single(t, actual, indices, labels, params)
+    % Create a new figure
+    figure;
+
+    % Generate distinct colors for each component
+    num_components = length(indices);
+    colors = lines(num_components); % Use MATLAB's lines colormap
+    
+    % Plot all actual components
+    for i = 1:num_components
+        idx = indices(i);
+        plot(t, actual(idx, :), ...
+             'LineStyle', params.line_styles{1}, ...
+             'Color', colors(i,:), ...
+             'LineWidth', 1.5);
+        hold on
+    end
+
+    legend(params.legend_labels);
+    
+    % Labels and formatting
+    xlabel('Time [s]');
+    ylabel_str = labels{1};
+    if ~isempty(params.units)
+        ylabel_str = sprintf('%s [%s]', ylabel_str, params.units);
+    end
+    ylabel(ylabel_str);
+    grid on;
+    set(findobj(gcf,'type','axes'),'FontName', 'Arial', 'FontSize', 12);    
+    hold off;
 end
