@@ -1,4 +1,4 @@
-function plot_settings(t, actual_data, varargin)
+function customPlot(t, actual_data, varargin)
 
     % Parameters:
     %   t              - Time vector
